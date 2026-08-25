@@ -1,7 +1,2 @@
-<<<<<<< HEAD
 .venv
-database
-.database
-=======
-.venv
->>>>>>> 4b4679bd3886564d6db3d452a1388bba4c853a50
+database/ideb.db

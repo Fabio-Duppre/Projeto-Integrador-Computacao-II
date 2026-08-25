@@ -1,0 +1,106 @@
+CREATE TABLE "municipio" (
+	"id" INTEGER NOT NULL,
+	"codigo_estado" INTEGER NOT NULL,
+	"nome" TEXT NOT NULL,
+	"codigo" INTEGER NULL,
+	PRIMARY KEY ("id")
+)
+;
+
+CREATE TABLE "estado" (
+	"id" INTEGER NOT NULL,
+	"uf" TEXT NOT NULL,
+	"nome" TEXT NOT NULL,
+	PRIMARY KEY ("id")
+)
+;
+
+CREATE TABLE "escola" (
+	"id" INTEGER NOT NULL,
+	"codigo_municipio" INTEGER NOT NULL,
+	"codigo" INTEGER NOT NULL,
+	"nome" TEXT NOT NULL,
+	"rede" TEXT NOT NULL,
+	PRIMARY KEY ("id")
+)
+;
+
+CREATE TABLE aprovacao (
+    id INTEGER PRIMARY KEY,
+    codigo_estado INTEGER NOT NULL,
+    codigo_municipio INTEGER NOT NULL,
+    codigo_escola INTEGER NOT NULL,
+    
+    ano INTEGER NOT NULL,
+    
+    todos REAL,
+    ano1 REAL,
+    ano2 REAL,
+    ano3 REAL,    
+    ano4 REAL,    
+    ano5 REAL,    
+    rendimento REAL,
+    
+    FOREIGN KEY (codigo_estado)
+        REFERENCES estado(codigo)
+    FOREIGN KEY (codigo_municipio)
+        REFERENCES municipio(codigo)
+    FOREIGN KEY (codigo_escola)
+        REFERENCES escola(codigo)
+);
+
+CREATE TABLE saeb (
+    id INTEGER PRIMARY KEY,
+    codigo_estado INTEGER NOT NULL,
+    codigo_municipio INTEGER NOT NULL,
+    codigo_escola INTEGER NOT NULL,
+    
+    ano INTEGER NOT NULL,
+      
+    matematica REAL,
+    portugues REAL,
+    media_padronizada REAL,    
+    
+    FOREIGN KEY (codigo_estado)
+        REFERENCES estado(codigo)
+    FOREIGN KEY (codigo_municipio)
+        REFERENCES municipio(codigo)
+    FOREIGN KEY (codigo_escola)
+        REFERENCES escola(codigo)
+);
+
+CREATE TABLE ideb (
+    id INTEGER PRIMARY KEY,
+    codigo_estado INTEGER NOT NULL,
+    codigo_municipio INTEGER NOT NULL,
+    codigo_escola INTEGER NOT NULL,
+    
+    ano INTEGER NOT NULL,
+      
+    ideb REAL,
+       
+    FOREIGN KEY (codigo_estado)
+        REFERENCES estado(codigo)
+    FOREIGN KEY (codigo_municipio)
+        REFERENCES municipio(codigo)
+    FOREIGN KEY (codigo_escola)
+        REFERENCES escola(codigo)
+);
+
+CREATE TABLE metas_ideb (
+    id INTEGER PRIMARY KEY,
+    codigo_estado INTEGER NOT NULL,
+    codigo_municipio INTEGER NOT NULL,
+    codigo_escola INTEGER NOT NULL,
+    
+    ano INTEGER NOT NULL,
+      
+    media REAL,
+     
+    FOREIGN KEY (codigo_estado)
+        REFERENCES estado(codigo)
+    FOREIGN KEY (codigo_municipio)
+        REFERENCES municipio(codigo)
+    FOREIGN KEY (codigo_escola)
+        REFERENCES escola(codigo)
+);
