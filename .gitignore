@@ -1,2 +1,3 @@
 .venv
 database/ideb.db
+__pycache__
