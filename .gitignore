@@ -2,4 +2,5 @@
 database/ideb.db
 database/__pycache__
 __pycache__
+routes/__pycache__
 .env
