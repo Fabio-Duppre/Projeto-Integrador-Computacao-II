@@ -1,18 +1,161 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-        <link rel="stylesheet" href="static/css/style.css"/>
-        <meta charset="UTF-8">
-        <title>Mapa</title>
+        {% include 'componentes/links.html'%}       
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>                
+        <title>EducaData Brasil - Tela inicial</title>
     </head>
-    <body>
-        <h1>Meu mapa</h1>
-        <div id="map">
+    <body class="bg-background text-on-surface font-body-md antialiased flex w-full min-h-screen">
+        <!-- SideNavBar (Desktop Only) -->
+        {% include 'componentes/aside.html' %}
 
+        <!-- Main Content Wrapper -->
+        <div class="ml-[280px] flex-1 flex flex-col min-h-screen">
+            <!-- TopNavBar -->
+            {% include 'componentes/header.html' %}
+            <!-- Canvas -->
+            <main class="flex-1 p-gutter max-w-7xl mx-auto w-full flex flex-col gap-gutter">
+                <!-- Summary Cards (Bento Row 1) -->
+                <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-sm">
+                    <!-- Card 1 -->
+                    <div class="bg-surface-container-lowest rounded-lg p-md elevation-1 border border-outline-variant hover:elevation-2 transition-all flex flex-col justify-between h-32">
+                        <div class="flex items-start justify-between">
+                            <h3 class="font-label-md text-label-md text-on-surface-variant leading-tight">Estado com mais metas batidas</h3>
+                            <span class="material-symbols-outlined text-secondary text-[20px]">trending_up</span>
+                        </div>
+                        <div>
+                            <p class="font-headline-lg text-headline-lg text-primary">Ceará</p>
+                            <p class="font-label-sm text-label-sm text-secondary">+12% vs. Meta</p>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-surface-container-lowest rounded-lg p-md elevation-1 border border-outline-variant hover:elevation-2 transition-all flex flex-col justify-between h-32">
+                        <div class="flex items-start justify-between">
+                            <h3 class="font-label-md text-label-md text-on-surface-variant leading-tight">Estado com menor número de metas batidas</h3>
+                            <span class="material-symbols-outlined text-error text-[20px]">trending_down</span>
+                        </div>
+                        <div>
+                            <p class="font-headline-lg text-headline-lg text-primary">Amapá</p>
+                            <p class="font-label-sm text-label-sm text-error">-4% vs. Meta</p>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-surface-container-lowest rounded-lg p-md elevation-1 border border-outline-variant hover:elevation-2 transition-all flex flex-col justify-between h-32">
+                        <div class="flex items-start justify-between">
+                            <h3 class="font-label-md text-label-md text-on-surface-variant leading-tight">Estado com mais escolas</h3>
+                            <span class="material-symbols-outlined text-primary text-[20px]">corporate_fare</span>
+                        </div>
+                        <div>
+                            <p class="font-headline-lg text-headline-lg text-primary">São Paulo</p>
+                            <p class="font-label-sm text-label-sm text-on-surface-variant">25.432 Unidades</p>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="bg-surface-container-lowest rounded-lg p-md elevation-1 border border-outline-variant hover:elevation-2 transition-all flex flex-col justify-between h-32">
+                        <div class="flex items-start justify-between">
+                            <h3 class="font-label-md text-label-md text-on-surface-variant leading-tight">Estado com o menor número de escolas</h3> 
+                            <span class="material-symbols-outlined text-primary text-[20px]">domain</span>
+                        </div>
+                        <div>
+                            <p class="font-headline-lg text-headline-lg text-primary">Roraima</p>
+                            <p class="font-label-sm text-label-sm text-on-surface-variant">412 Unidades</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- Main Data Bento (Row 2) -->
+                <section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter h-[500px]">
+                    <!-- Interactive Map Section (Span 2) -->
+                    <div class="lg:col-span-2 bg-surface-container-lowest rounded-lg elevation-1 border border-outline-variant flex flex-col relative overflow-hidden">
+                        <div class="p-md border-b border-surface-container flex justify-between items-center bg-surface-bright z-10 relative">
+                            <div>
+                                <h2 class="font-headline-sm text-headline-sm text-primary">
+                                    Desempenho Nacional por Estado
+                                </h2>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                                    Visão geral do IDEB e SAEB por região federativa.
+                                </p>
+                            </div>                                  
+                        </div>
+                        <div class="flex-1 relative bg-surface-container-low group">
+                            <!-- Placeholder Map Graphic -->
+                            <div id="map" class="w-full h-full bg-contain bg-center bg-no-repeat opacity-80 mix-blend-multiply group-hover:opacity-100 transition-opacity duration-500" data-alt="A highly detailed vector map of Brazil, styled in a clean, modern digital aesthetic. The map regions are colored in very subtle shades of light blue-gray against a soft off-white background. The style is strictly professional, corporate data visualization, emphasizing clean borders and high legibility without extraneous decorations.">
+
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- Regional Charts (Span 1) -->
+                    <div class="lg:col-span-1 bg-surface-container-lowest rounded-lg p-md elevation-1 border border-outline-variant flex flex-col">
+                        <h2 class="font-headline-sm text-headline-sm text-primary mb-1">Média SAEB por Região</h2>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant mb-lg">Comparativo consolidado do último ciclo avaliativo.</p>
+                        <!-- Chart Placeholder (CSS Driven) -->
+                        <div class="flex-1 flex flex-col justify-end gap-sm pt-4 border-l border-b border-outline-variant pb-2 pl-2">
+                            <!-- Bar Item: Sul -->  
+                            <div class="flex items-center gap-3 w-full group">
+                                <span class="font-label-sm text-label-sm text-on-surface-variant w-12 text-right">Sul</span>
+                                <div class="flex-1 h-6 bg-surface-container-high rounded-r relative overflow-hidden">
+                                    <div class="absolute left-0 top-0 h-full bg-primary group-hover:bg-primary-container transition-colors" style="width: 85%;">
+
+                                    </div>
+                                </div>
+                                <span class="font-label-md text-label-md text-primary w-8">6.8</span>
+                            </div>
+                            <!-- Bar Item: Sudeste -->
+                            <div class="flex items-center gap-3 w-full group">
+                                <span class="font-label-sm text-label-sm text-on-surface-variant w-12 text-right">Sudeste</span>
+                                <div class="flex-1 h-6 bg-surface-container-high rounded-r relative overflow-hidden">
+                                        <div class="absolute left-0 top-0 h-full bg-primary group-hover:bg-primary-container transition-colors" style="width: 80%;">
+
+                                        </div>
+                                </div>
+                                <span class="font-label-md text-label-md text-primary w-8">6.5</span>
+                            </div>
+                            <!-- Bar Item: Centro-Oeste -->
+                            <div class="flex items-center gap-3 w-full group">
+                                <span class="font-label-sm text-label-sm text-on-surface-variant w-12 text-right">C. Oeste</span>
+                                <div class="flex-1 h-6 bg-surface-container-high rounded-r relative overflow-hidden">
+                                    <div class="absolute left-0 top-0 h-full bg-primary group-hover:bg-primary-container transition-colors" style="width: 72%;">
+
+                                    </div>
+                                </div>
+                                <span class="font-label-md text-label-md text-primary w-8">5.9</span>
+                            </div>
+                            <!-- Bar Item: Norte -->
+                            <div class="flex items-center gap-3 w-full group">
+                                <span class="font-label-sm text-label-sm text-on-surface-variant w-12 text-right">Norte</span>
+                                <div class="flex-1 h-6 bg-surface-container-high rounded-r relative overflow-hidden">
+                                    <div class="absolute left-0 top-0 h-full bg-primary group-hover:bg-primary-container transition-colors" style="width: 60%;">
+
+                                    </div>
+                                </div>
+                                    <span class="font-label-md text-label-md text-primary w-8">5.2</span>
+                            </div>
+                            <!-- Bar Item: Nordeste -->
+                            <div class="flex items-center gap-3 w-full group">
+                                <span class="font-label-sm text-label-sm text-on-surface-variant w-12 text-right">Nordeste</span>
+                                <div class="flex-1 h-6 bg-surface-container-high rounded-r relative overflow-hidden">
+                                    <div class="absolute left-0 top-0 h-full bg-primary group-hover:bg-primary-container transition-colors" style="width: 58%;">
+
+                                    </div>
+                                </div>
+                                    <span class="font-label-md text-label-md text-primary w-8">5.1</span>
+                            </div>  
+                            <!-- Axis Labels -->
+                            <div class="flex justify-between w-full pl-[60px] pr-[32px] mt-2">
+                                <span class="font-label-sm text-label-sm text-outline text-[10px]">0.0</span>
+                                <span class="font-label-sm text-label-sm text-outline text-[10px]">4.0</span>
+                                <span class="font-label-sm text-label-sm text-outline text-[10px]">8.0</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+            <!-- footer -->
+            {%include('componentes/footer.html')%}
         </div>
 
 
+    
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
         <script src="static/js/mapa.js"></script>
     </body>

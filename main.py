@@ -11,6 +11,18 @@ app.register_blueprint(api)
 def index():
     return render_template("index.html")
 
+@app.route("/escolas")
+def escolas():
+    return render_template("escolas.html")
+
+@app.route("/municipios")
+def municipios():
+    return render_template("municipios.html")
+
+@app.route("/comparacao")
+def comparacao():
+    return render_template("comparacao.html")
+
 
 if __name__ == "__main__":    
     app.run(debug=True)

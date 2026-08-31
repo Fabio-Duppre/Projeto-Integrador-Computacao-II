@@ -1,3 +1,45 @@
-#map{
-    height: 600px;
+/* 
+    Estilo para Tela inicial
+*/
+.elevation-1 { 
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05); 
 }
+.elevation-2 {
+     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.08); 
+}
+.glass-card {
+     background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); 
+}
+/* 
+    Estilo para Comparação
+*/
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.icon-fill {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+/* Dashboard Card Elevation */
+.data-card {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s ease-in-out;
+}
+.data-card:hover {
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.08);
+}
+/* Chart specific utility */
+.chart-grid-line {
+    background-image: linear-gradient(to right, transparent 50%, rgba(194, 198, 212, 0.5) 50%);
+    background-size: 8px 100%;
+}
+
+/*
+    Gerais
+*/
+
+footer{
+    height: 200px !important;
+    background-color: black;
+}
+
+
