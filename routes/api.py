@@ -32,6 +32,7 @@ def estados():
     finally:
         connection.close()
 
+## Estado por id
 @api.route("/api/estados/<int:id>", methods=["GET"])
 def estado_id(id):
     connection = get_connection()
@@ -55,6 +56,7 @@ def estado_id(id):
     finally:
         connection.close()
 
+## media ideb dos estados
 @api.route("/api/estados/media", methods=["GET"])
 def estado_media():
     connection = get_connection()
@@ -83,9 +85,6 @@ def estado_media():
         connection.close()
 
 
-
-
-
 ## Consulta da tabela de municipios
 @api.route("/api/municipios", methods=["GET"])
 def municipios():
@@ -104,6 +103,7 @@ def municipios():
     finally:
         connection.close()
 
+## Municipio por codigo de municipio
 @api.route("/api/municipios/<int:codigo>", methods=["GET"])
 def municipio_codigo(codigo):
     connection = get_connection()
@@ -127,8 +127,6 @@ def municipio_codigo(codigo):
     finally:
         connection.close()
 
-
-
 ## Consulta da tabela de escolas
 @api.route("/api/escolas", methods=["GET"])
 def escolas():
@@ -147,7 +145,7 @@ def escolas():
     finally:
         connection.close()
 
-
+## Consulta de escolas por código
 @api.route("/api/escolas/<int:codigo>", methods=["GET"])
 def escola_codigo(codigo):
     connection = get_connection()
@@ -171,3 +169,21 @@ def escola_codigo(codigo):
     finally:
         connection.close()
 
+## Consulta dos cards da tela inicial
+@api.route("/api/cards", methods=["GET"])
+def cards():    
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+
+        cursor.execute(
+            """
+                SELECT *
+                FROM card                
+            """,
+        )
+
+        cards = cursor.fetchall()
+        return jsonify(cards)
+    finally:
+        connection.close()

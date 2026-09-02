@@ -38,8 +38,9 @@
 */
 
 footer{
-    height: 200px !important;
-    background-color: black;
+    margin-top: 55px !important;
 }
 
-
+#aside_ajuda{
+    padding-top: 74px;
+}

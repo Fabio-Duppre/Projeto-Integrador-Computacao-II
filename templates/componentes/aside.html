@@ -2,8 +2,8 @@
     <!-- Brand/Header -->
     <div class="flex items-center gap-sm mb-lg px-xs">
         <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container shrink-0">
-            <span class="material-symbols-outlined icon-fill">
-                account_balance
+            <span class="material-symbols-outlined">
+                dataset
             </span>
         </div>
         <div class="flex flex-col">
@@ -19,8 +19,10 @@
                     {% else%}    
                         flex items-center gap-sm px-sm py-sm text-on-surface-variant hover:bg-surface-container-highest transition-all scale-95 duration-150 rounded-lg
                     {% endif %}" href="{{ url_for('index') }}">
-            <span class="material-symbols-outlined">dashboard</span>
-            <span class="font-label-md text-label-md">Index</span>
+            <span class="material-symbols-outlined">
+                home
+            </span>
+            <span class="font-label-md text-label-md">Tela Principal</span>
         </a>
         <a class="
                     {% if request.endpoint == 'municipios' %}
@@ -53,7 +55,7 @@
     </nav>
 
     <!-- Footer Nav Tabs -->
-    <div class="flex flex-col gap-base border-t border-outline-variant pt-sm mt-auto">
+    <div id="aside_ajuda" class="flex flex-col gap-base border-t border-outline-variant pt-sm mt-auto">
         <a class="flex items-center gap-sm px-sm py-sm text-on-surface-variant hover:bg-surface-container-highest transition-all scale-95 duration-150 rounded-lg" href="#">
             <span class="material-symbols-outlined">help</span>
             <span class="font-label-md text-label-md">Ajuda</span>

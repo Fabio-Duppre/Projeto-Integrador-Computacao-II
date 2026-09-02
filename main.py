@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from routes.api import api
 from pathlib import Path
+from database.connection import get_connection
 
 arquivo = Path("static/geojson/municipios.json")
 
@@ -9,7 +10,22 @@ app.register_blueprint(api)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    connection = get_connection()
+
+    try:
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM card
+        """)
+
+        cards = cursor.fetchall()
+
+    finally:
+        connection.close()
+
+    return render_template("index.html", cards=cards)
 
 @app.route("/escolas")
 def escolas():
