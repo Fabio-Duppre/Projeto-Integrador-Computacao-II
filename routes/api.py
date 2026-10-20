@@ -118,12 +118,82 @@ def municipio_codigo(codigo):
         )
         municipio = cursor.fetchone()
 
-        if municipio is None:
+        if not municipio:
             return jsonify({
                 "erro":"Municipio não encontrado"
             })
         return jsonify(municipio)
     
+    finally:
+        connection.close()
+
+## Municipio por codigo de estado
+@api.route("/api/municipios_estado/<int:codigo_estado>", methods=["GET"])
+def municipios_estado(codigo_estado):
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute(
+            """
+                SELECT *
+                FROM municipio
+                WHERE codigo_estado = %s
+            """, (codigo_estado,)
+        )
+        municipio = cursor.fetchall()
+
+        if municipio is None:
+            return jsonify({
+                "erro":"Municipios não encontrado"
+            })
+        return jsonify(municipio)
+    
+    finally:
+        connection.close()
+ 
+## Consulta municipio por codigo, trazendo UF, Media ideb e eescolas participantes
+@api.route("/api/municipios_cards/<int:codigo_municipio>", methods=["GET"])
+def municipios_cards(codigo_municipio):
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute(
+            """
+                SELECT M.nome, E.uf, M.codigo, COUNT(DISTINCT I.codigo_escola) AS numero_escolas, ROUND(AVG(I.valor_ideb)) AS media
+                FROM municipio M
+                INNER JOIN estado E
+                ON M.codigo_estado = E.id
+                INNER JOIN ideb I
+                ON I.codigo_municipio = M.codigo
+                WHERE M.codigo = %s
+                GROUP BY M.nome, E.uf, M.codigo
+                ORDER BY 1
+            """, (codigo_municipio)
+        )
+
+        municipios = cursor.fetchall()
+        return jsonify(municipios)
+    finally:
+            connection.close()
+    
+
+## Consulta dos anos do municipio no ideb
+@api.route("/api/anos_municipios_ideb/<int:codigo_municipio>", methods=["GET"])
+def anos_municipios_ideb(codigo_municipio):
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute(
+            """
+                SELECT DISTINCT ano, ROUND(AVG(valor_ideb)) AS ano_valor
+                FROM ideb 
+                WHERE codigo_municipio = %s
+                GROUP BY ano
+            """, (codigo_municipio)
+        )
+
+        anos = cursor.fetchall()
+        return jsonify(anos)
     finally:
         connection.close()
 
@@ -138,7 +208,7 @@ def escolas():
                 SELECT *
                 FROM escola
             """
-        )
+        ), 
 
         escolas = cursor.fetchall()
         return jsonify(escolas)
