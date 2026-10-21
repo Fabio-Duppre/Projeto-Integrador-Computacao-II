@@ -29,7 +29,21 @@ def index():
 
 @app.route("/escolas")
 def escolas():
-    return render_template("escolas.html")
+    connection = get_connection()
+
+    try:
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM estado
+        """)
+
+        estados = cursor.fetchall()
+    
+    finally:
+        connection.close()
+    return render_template("escolas.html", estados = estados)
 
 @app.route("/municipios")
 def municipios():

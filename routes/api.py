@@ -239,6 +239,81 @@ def escola_codigo(codigo):
     finally:
         connection.close()
 
+## Consulta de escolas por codigo de municipio
+@api.route("/api/escolas_municipio/<int:codigo_municipio>", methods=["GET"])
+def escolas_municipio(codigo_municipio):
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute(
+            """
+                SELECT *
+                FROM escola
+                WHERE codigo_municipio = %s
+            """, (codigo_municipio,)
+        )
+        escola = cursor.fetchall()
+
+        if not escola:
+            return jsonify({
+                "erro":"Escola não encontrada"
+            })
+        return jsonify(escola)
+    
+    finally:
+        connection.close()
+
+## Consulta informações pro card da pagina de escolas
+@api.route("/api/escolas_cards/<int:codigo_escola>", methods=["GET"])
+def escolas_cards(codigo_escola):
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute(
+            """
+                SELECT nome, codigo, rede
+                FROM escola
+                WHERE codigo = %s
+            """, (codigo_escola,)
+        )
+        escola = cursor.fetchall()
+
+        if not escola:
+            return jsonify({
+                "erro":"Escola não encontrada"
+            })
+        return jsonify(escola)
+    
+    finally:
+        connection.close()
+
+## Consulta informações pro grafico de linhas
+@api.route("/api/escola_linha/<int:codigo_escola>", methods=["GET"])
+def escola_linha(codigo_escola):
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute(
+            """
+                SELECT I.valor_ideb, I.ano
+                FROM escola E
+                LEFT JOIN ideb I 
+                ON E.codigo = I.codigo_escola
+                WHERE E.codigo = %s
+                ORDER BY I.ano
+            """, (codigo_escola,)
+        )
+        escola = cursor.fetchall()
+
+        if not escola:
+            return jsonify({
+                "erro":"Escola não encontrada"
+            })
+        return jsonify(escola)
+    
+    finally:
+        connection.close()
+
 ## Consulta dos cards da tela inicial
 @api.route("/api/cards", methods=["GET"])
 def cards():    
