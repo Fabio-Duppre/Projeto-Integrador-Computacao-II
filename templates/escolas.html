@@ -33,7 +33,7 @@
                         </p>
                     </div>
 
-                    <button class="flex items-center gap-xs bg-primary text-on-primary font-label-md text-label-md px-sm py-2 rounded-lg hover:bg-on-primary-fixed-variant transition-colors shadow-sm">
+                    <button id="btnExportarGraficos" class="flex items-center gap-xs bg-primary text-on-primary font-label-md text-label-md px-sm py-2 rounded-lg hover:bg-on-primary-fixed-variant transition-colors shadow-sm">
                         <span class="material-symbols-outlined text-[18px]">download</span>
                         Exportar Relatório
                     </button>
@@ -196,183 +196,18 @@
                         </div>
                     </div>
 
-                    <!-- Chart 3: Goals vs Achieved (Dual Bar) -->
+                    <!-- Chart 2: Goals vs Achieved (Dual Bar) -->
                     <div class="bg-surface-container-lowest rounded-lg p-md shadow-sm border border-surface-container-highest flex flex-col h-[360px]">
-
-                        <div class="flex justify-between items-start mb-lg">
-
-                            <div>
-                                <h4 class="font-headline-sm text-headline-sm text-on-surface">
-                                    Metas vs. IDEB Alcançado
-                                </h4>
-
-                                <p class="font-body-sm text-on-surface-variant">
-                                    Comparativo de projeções MEC
-                                </p>
-                            </div>
-
-                            <div class="flex items-center gap-sm font-label-sm text-label-sm">
-                                <span class="flex items-center gap-1">
-                                    <span class="w-3 h-3 rounded-full bg-surface-variant"></span>
-                                    Meta
-                                </span>
-
-                                <span class="flex items-center gap-1">
-                                    <span class="w-3 h-3 rounded-full bg-secondary-container"></span>
-                                    Alcançado
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="flex-1 flex items-end justify-around border-b border-outline-variant pb-2 relative pl-6 pt-4">
-
-                            <!-- Y Axis -->
-                            <div class="absolute left-0 top-0 h-full flex flex-col justify-between font-label-sm text-label-sm text-on-surface-variant pb-8 pr-2 text-right w-8">
-                                <span>7.0</span>
-                                <span>5.0</span>
-                                <span>3.0</span>
-                                <span>0</span>
-                            </div>
-
-                            <!-- Bar Groups -->
-                            <div class="flex flex-col items-center h-full justify-end group">
-                                <div class="flex items-end gap-1 h-[200px] relative">
-                                    <div class="w-6 bg-surface-variant rounded-t-sm" style="height: 60%;" title="Meta: 4.2"></div>
-                                    <div class="w-6 bg-secondary-container rounded-t-sm" style="height: 65%;" title="Alcançado: 4.5"></div>
-                                </div>
-
-                                <span class="font-label-sm text-label-sm text-on-surface-variant mt-2">
-                                    2017
-                                </span>
-                            </div>
-
-                            <div class="flex flex-col items-center h-full justify-end group">
-                                <div class="flex items-end gap-1 h-[200px] relative">
-                                    <div class="w-6 bg-surface-variant rounded-t-sm" style="height: 65%;" title="Meta: 4.5"></div>
-                                    <div class="w-6 bg-secondary-container rounded-t-sm" style="height: 75%;" title="Alcançado: 5.2"></div>
-                                </div>
-
-                                <span class="font-label-sm text-label-sm text-on-surface-variant mt-2">
-                                    2019
-                                </span>
-                            </div>
-
-                            <div class="flex flex-col items-center h-full justify-end group">
-                                <div class="flex items-end gap-1 h-[200px] relative">
-                                    <div class="w-6 bg-surface-variant rounded-t-sm" style="height: 70%;" title="Meta: 4.9"></div>
-                                    <div class="w-6 bg-secondary-container rounded-t-sm" style="height: 68%;" title="Alcançado: 4.7"></div>
-                                </div>
-
-                                <span class="font-label-sm text-label-sm text-on-surface-variant mt-2">
-                                    2021
-                                </span>
-                            </div>
-
-                            <div class="flex flex-col items-center h-full justify-end group">
-                                <div class="flex items-end gap-1 h-[200px] relative">
-                                    <div class="w-6 bg-surface-variant rounded-t-sm" style="height: 75%;" title="Meta: 5.2"></div>
-                                    <div class="w-6 bg-secondary-container rounded-t-sm" style="height: 90%;" title="Alcançado: 6.4"></div>
-                                </div>
-
-                                <span class="font-label-sm text-label-sm text-on-surface-variant mt-2">
-                                    2023
-                                </span>
-                            </div>
+                        <div class="relative w-full h-80 hidden" id="divBarraIdeb">                     
+                            <canvas id="graficoBarraIdeb"></canvas>
                         </div>
                     </div>
 
-                    <!-- Chart 2: Proficiency (Grouped Bar) -->
-                    <div class="bg-surface-container-lowest rounded-lg p-md shadow-sm border border-surface-container-highest flex flex-col h-[400px] lg:col-span-2">
-
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-lg gap-sm">
-
-                            <div>
-                                <h4 class="font-headline-sm text-headline-sm text-on-surface">
-                                    Proficiência Média (SAEB)
-                                </h4>
-
-                                <p class="font-body-sm text-on-surface-variant">
-                                    Desempenho por disciplina ao longo dos anos
-                                </p>
-                            </div>
-
-                            <div class="flex items-center gap-sm font-label-sm text-label-sm bg-surface-container-low p-2 rounded-md border border-outline-variant">
-
-                                <span class="flex items-center gap-1">
-                                    <span class="w-3 h-3 rounded bg-primary"></span>
-                                    Matemática
-                                </span>
-
-                                <span class="flex items-center gap-1">
-                                    <span class="w-3 h-3 rounded bg-secondary"></span>
-                                    Português
-                                </span>
-
-                                <span class="flex items-center gap-1">
-                                    <span class="w-3 h-3 rounded bg-tertiary-fixed-dim"></span>
-                                    Média Total
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="flex-1 flex items-end justify-around border-b border-outline-variant pb-2 relative pl-8 pt-4">
-
-                            <!-- Y Axis -->
-                            <div class="absolute left-0 top-0 h-full flex flex-col justify-between font-label-sm text-label-sm text-on-surface-variant pb-8 pr-2 text-right w-10">
-                                <span>300</span>
-                                <span>250</span>
-                                <span>200</span>
-                                <span>150</span>
-                                <span>0</span>
-                            </div>
-
-                            <!-- Data Groups -->
-                            <div class="flex flex-col items-center h-full justify-end">
-                                <div class="flex items-end gap-1 h-[250px]">
-                                    <div class="w-8 bg-primary rounded-t-sm hover:opacity-80 transition-opacity" style="height: 60%;" title="Matemática: 210"></div>
-                                    <div class="w-8 bg-secondary rounded-t-sm hover:opacity-80 transition-opacity" style="height: 65%;" title="Português: 220"></div>
-                                    <div class="w-8 bg-tertiary-fixed-dim rounded-t-sm hover:opacity-80 transition-opacity" style="height: 62%;" title="Média: 215"></div>
-                                </div>
-
-                                <span class="font-label-sm text-label-sm text-on-surface-variant mt-2 font-semibold">
-                                    2017
-                                </span>
-                            </div>
-
-                            <div class="flex flex-col items-center h-full justify-end">
-                                <div class="flex items-end gap-1 h-[250px]">
-                                    <div class="w-8 bg-primary rounded-t-sm hover:opacity-80 transition-opacity" style="height: 68%;" title="Matemática: 230"></div>
-                                    <div class="w-8 bg-secondary rounded-t-sm hover:opacity-80 transition-opacity" style="height: 72%;" title="Português: 240"></div>
-                                    <div class="w-8 bg-tertiary-fixed-dim rounded-t-sm hover:opacity-80 transition-opacity" style="height: 70%;" title="Média: 235"></div>
-                                </div>
-
-                                <span class="font-label-sm text-label-sm text-on-surface-variant mt-2 font-semibold">
-                                    2019
-                                </span>
-                            </div>
-
-                            <div class="flex flex-col items-center h-full justify-end">
-                                <div class="flex items-end gap-1 h-[250px]">
-                                    <div class="w-8 bg-primary rounded-t-sm hover:opacity-80 transition-opacity" style="height: 65%;" title="Matemática: 225"></div>
-                                    <div class="w-8 bg-secondary rounded-t-sm hover:opacity-80 transition-opacity" style="height: 68%;" title="Português: 230"></div>
-                                    <div class="w-8 bg-tertiary-fixed-dim rounded-t-sm hover:opacity-80 transition-opacity" style="height: 66%;" title="Média: 227"></div>
-                                </div>
-
-                                <span class="font-label-sm text-label-sm text-on-surface-variant mt-2 font-semibold">
-                                    2021
-                                </span>
-                            </div>
-
-                            <div class="flex flex-col items-center h-full justify-end">
-                                <div class="flex items-end gap-1 h-[250px]">
-                                    <div class="w-8 bg-primary rounded-t-sm hover:opacity-80 transition-opacity" style="height: 85%;" title="Matemática: 275"></div>
-                                    <div class="w-8 bg-secondary rounded-t-sm hover:opacity-80 transition-opacity" style="height: 82%;" title="Português: 265"></div>
-                                    <div class="w-8 bg-tertiary-fixed-dim rounded-t-sm hover:opacity-80 transition-opacity" style="height: 83%;" title="Média: 270"></div>
-                                </div>
-
-                                <span class="font-label-sm text-label-sm text-on-surface-variant mt-2 font-semibold">
-                                    2023
-                                </span>
+                    <!-- Chart 3: Proficiency (Grouped Bar) -->
+                    <div class="bg-surface-container-lowest rounded-lg p-md shadow-sm border border-surface-container-highest flex flex-col h-[400px] lg:col-span-2">                                    
+                        <div class="bg-surface-container-lowest rounded-lg p-md shadow-sm border border-surface-container-highest flex flex-col h-[360px]">
+                            <div class="relative w-full h-80 hidden" id="divBarraSaeb">                     
+                                <canvas id="graficoBarraSaeb"></canvas>
                             </div>
                         </div>
                     </div>

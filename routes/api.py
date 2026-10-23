@@ -296,10 +296,8 @@ def escola_linha(codigo_escola):
         cursor.execute(
             """
                 SELECT I.valor_ideb, I.ano
-                FROM escola E
-                LEFT JOIN ideb I 
-                ON E.codigo = I.codigo_escola
-                WHERE E.codigo = %s
+                FROM ideb I
+                WHERE I.codigo_escola = %s
                 ORDER BY I.ano
             """, (codigo_escola,)
         )
@@ -313,6 +311,66 @@ def escola_linha(codigo_escola):
     
     finally:
         connection.close()
+
+
+## Consulta informações pro grafico de Barras ideb 
+@api.route("/api/escola_barrasIdeb/<int:codigo_escola>", methods=["GET"])
+def escola_barrasIdeb(codigo_escola):
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute(
+            """
+                SELECT                    
+                    I.ano,
+                    I.valor_ideb,
+                    COALESCE(M.meta_ideb, 0) AS meta_ideb
+                FROM ideb I
+                LEFT JOIN metas_ideb M
+                    ON I.codigo_escola = M.codigo_escola
+                    AND I.ano = M.ano
+                WHERE I.codigo_escola = %s
+                ORDER BY I.ano;
+            """, (codigo_escola,)
+        )
+        escola = cursor.fetchall()
+
+        if not escola:
+            return jsonify({
+                "erro":"Escola não encontrada"
+            })
+        return jsonify(escola)
+
+    finally:
+        connection.close()
+
+
+## Consulta informações pro grafico de Barras SAEB
+@api.route("/api/escola_barrasSaeb/<int:codigo_escola>", methods=["GET"])
+def escola_barrasSaeb(codigo_escola):
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute(
+            """
+                SELECT ano, matematica, portugues, media_padronizada
+                FROM saeb
+                WHERE codigo_escola = %s
+
+            """, (codigo_escola,)
+        )
+        escola = cursor.fetchall()
+
+        if not escola:
+            return jsonify({
+                "erro":"Escola não encontrada"
+            })
+        return jsonify(escola)
+
+    finally:
+        connection.close()
+
+
 
 ## Consulta dos cards da tela inicial
 @api.route("/api/cards", methods=["GET"])
@@ -332,3 +390,6 @@ def cards():
         return jsonify(cards)
     finally:
         connection.close()
+
+
+

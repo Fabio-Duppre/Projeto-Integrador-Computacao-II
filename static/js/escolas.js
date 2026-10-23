@@ -267,11 +267,15 @@ btnPesquisar.addEventListener("click", async () => {
     // Carrega os dados da escola
     await carregarEscola(codigoEscola);
 
-    // Carregar o grafico da escola
+    // Carregar o grafico de linha da escola
     await carregarGraficoLinha(codigoEscola);
+    
+    // Carregar o grafico de barra(ideb) da escola
+    await carregarGraficoBarraIdeb(codigoEscola);
 
-
-
+    // Carregar o grafico de barra(ideb) da escola
+    await carregarGraficoBarraSaeb(codigoEscola);
+    
 });
 
 async function carregarEscola(codigoEscola){
@@ -356,3 +360,179 @@ async function carregarGraficoLinha(codigoEscola){
     }         
 
 }
+
+
+// verifica grafico ja criado
+let graficoBarraIdeb = null;
+
+async function carregarGraficoBarraIdeb(codigoEscola){
+    const ctx = document.getElementById('graficoBarraIdeb');
+    const div = document.getElementById('divBarraIdeb');
+
+    try {
+        const resposta_escola = await fetch(           
+            `/api/escola_barrasIdeb/${codigoEscola}`
+        );
+
+        const dados = await resposta_escola.json();
+
+        if (!resposta_escola.ok) {
+            throw new Error(dados.erro || "Erro ao carregar dados da escola.");
+        }     
+        
+        const labels        = dados.map(item => item.ano);
+        const valores_ideb  = dados.map(item => item.valor_ideb)
+        const valores_metas = dados.map(item => item.meta_ideb)
+
+        div.classList.remove("hidden"); 
+    
+        if (graficoBarraIdeb) {        
+            graficoBarraIdeb.data.labels = labels;
+            graficoBarraIdeb.data.datasets[0].data = valores_ideb;
+            graficoBarraIdeb.data.datasets[1].data = valores_metas;
+            graficoBarraIdeb.update();
+        } else {
+            graficoBarraIdeb = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Valores nos anos do IDEB',
+                    data: valores_ideb,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Valores METAS IDEB',
+                    data: valores_metas,
+                    borderWidth: 1
+                }],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                        beginAtZero: true
+                        }
+                    }
+                }
+            }); 
+        }    
+
+    } catch (erro) {
+        console.error("Erro ao buscar dados da escola:", erro);        
+    }         
+
+}
+
+
+// verifica grafico ja criado
+let graficoBarraSaeb = null;
+
+async function carregarGraficoBarraSaeb(codigoEscola){
+    const ctx = document.getElementById('graficoBarraSaeb');
+    const div = document.getElementById('divBarraSaeb');
+
+    try {
+        const resposta_escola = await fetch(           
+            `/api/escola_barrasSaeb/${codigoEscola}`
+        );
+
+        const dados = await resposta_escola.json();
+
+        if (!resposta_escola.ok) {
+            throw new Error(dados.erro || "Erro ao carregar dados da escola.");
+        }     
+        
+        const labels            = dados.map(item => item.ano);
+        const portugues         = dados.map(item => item.portugues)
+        const matematica        = dados.map(item => item.matematica)
+        const media_padronizada = dados.map(item => item.media_padronizada)
+
+        div.classList.remove("hidden"); 
+    
+        if (graficoBarraSaeb) {        
+            graficoBarraSaeb.data.labels = labels;
+            graficoBarraSaeb.data.datasets[0].data = matematica;
+            graficoBarraSaeb.data.datasets[1].data = portugues;
+            graficoBarraSaeb.data.datasets[2].data = media_padronizada;
+            graficoBarraSaeb.update();
+        } else {
+            graficoBarraSaeb = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Matematica',
+                    data: matematica,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Portugues',
+                    data: portugues,
+                    borderWidth: 1
+                },
+                                {
+                    label: 'Media Padronizada',
+                    data: media_padronizada,
+                    borderWidth: 1
+                }],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                        beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'SAEB'
+                        },
+                    }
+                }
+            }); 
+        }    
+
+    } catch (erro) {
+        console.error("Erro ao buscar dados da escola:", erro);        
+    }         
+
+}
+
+function exportarGraficos() {
+
+    const graficos = [
+        {
+            grafico: graficoLinha,
+            nome: 'grafico_Linha.png'
+        },
+        {
+            grafico: graficoBarraIdeb,
+            nome: 'grafico_ideb_metas.png'
+        },
+        {
+            grafico: graficoBarraSaeb,
+            nome: 'grafico_saeb.png'
+        }
+    ];
+
+    graficos.forEach((item, index) => {
+
+        if (!item.grafico) {
+            console.warn(`O gráfico ${item.nome} não foi criado.`);
+            return;
+        }
+
+        const link = document.createElement('a');
+
+        link.href = item.grafico.toBase64Image();
+        link.download = item.nome;
+
+        link.click();
+    });
+}
+
+document.getElementById('btnExportarGraficos').addEventListener('click', exportarGraficos);
