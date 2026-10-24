@@ -371,6 +371,31 @@ def escola_barrasSaeb(codigo_escola):
         connection.close()
 
 
+## Consulta informações media SAEB
+@api.route("/api/escola_MediaSaeb/<int:codigo_escola>", methods=["GET"])
+def escola_MediaSaeb(codigo_escola):
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute(
+            """
+                SELECT S.media_padronizada, S.ano
+                FROM saeb S
+                WHERE S.codigo_escola = %s
+                AND S.ano = 2025
+            """, (codigo_escola,)
+        )
+        escola = cursor.fetchall()
+
+        if not escola:
+            return jsonify({
+                "erro":"Escola não encontrada"
+            })
+        return jsonify(escola)
+
+    finally:
+        connection.close()
+
 
 ## Consulta dos cards da tela inicial
 @api.route("/api/cards", methods=["GET"])

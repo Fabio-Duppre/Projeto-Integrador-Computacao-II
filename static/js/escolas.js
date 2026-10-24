@@ -472,7 +472,7 @@ async function carregarGraficoBarraSaeb(codigoEscola){
                     data: portugues,
                     borderWidth: 1
                 },
-                                {
+                {
                     label: 'Media Padronizada',
                     data: media_padronizada,
                     borderWidth: 1

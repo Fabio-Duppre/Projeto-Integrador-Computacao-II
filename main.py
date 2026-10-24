@@ -64,9 +64,25 @@ def municipios():
 
     return render_template("municipios.html", estados = estados)
 
+
 @app.route("/comparacao")
 def comparacao():
-    return render_template("comparacao.html")
+    connection = get_connection()
+
+    try:
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM estado
+        """)
+
+        estados = cursor.fetchall()
+
+    finally:
+        connection.close()
+
+    return render_template("comparacao.html", estados = estados)
 
 
 if __name__ == "__main__":    

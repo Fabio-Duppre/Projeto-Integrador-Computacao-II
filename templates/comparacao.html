@@ -25,192 +25,182 @@
                 <section class="flex flex-col gap-sm">
                     <h1 class="font-headline-lg-mobile md:font-headline-lg text-on-background">Análise Comparativa</h1>
                     <p class="font-body-md text-on-surface-variant max-w-3xl">Selecione até 3 unidades escolares para cruzar dados de desempenho, proficiência e metas atingidas.</p>
-
-                    <!-- Filter Panel -->
+                                   
                     <div class="mt-sm bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-sm">
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-md">
+                         <!-- Filter Panel -->                  
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-sm">
+                            <!--Estado-->
+                            <div>
+                                <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">
+                                    Estado
+                                    <span class="text-error">*</span>
+                                </label>
 
-                            <!-- Filters -->
-                            <div class="flex flex-col gap-base">
-                                <label class="font-label-sm text-on-surface-variant">Estado  <span class="text-error">*</span></label>
-                                <select class="form-select bg-surface border border-outline-variant rounded-lg font-body-sm text-on-surface focus:ring-primary">
-                                    <option>São Paulo</option>
-                                    <option>Rio de Janeiro</option>
+                                <select
+                                    id="estado"
+                                    name="estado"
+                                    class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]"
+                                    required
+                                >
+                                    <option value="">
+                                        Selecione um Estado
+                                    </option>
+
+                                    {% for estado in estados %}
+                                        <option value="{{ estado.id }}">
+                                            {{ estado.nome }}
+                                        </option>
+                                    {% endfor %}
                                 </select>
                             </div>
-
-                            <div class="flex flex-col gap-base">
-                                <label class="font-label-sm text-on-surface-variant">Cidade  <span class="text-error">*</span></label>
-                                <select class="form-select bg-surface border border-outline-variant rounded-lg font-body-sm text-on-surface focus:ring-primary">
-                                    <option>São Paulo (Capital)</option>
-                                    <option>Campinas</option>
-                                </select>
-                            </div>
-
-                            <div class="flex flex-col gap-base">
-                                <label class="font-label-sm text-on-surface-variant">Ano Base  <span class="text-error">*</span></label>
-                                <select class="form-select bg-surface border border-outline-variant rounded-lg font-body-sm text-on-surface focus:ring-primary">
-                                    <option>2023</option>
-                                    <option>2022</option>
-                                </select>
-                            </div>
-
-                            <div class="flex flex-col gap-base">
-                                <label class="font-label-sm text-on-surface-variant">Buscar Escola</label>
+                            <!-- Município -->
+                            <div>
+                                <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">
+                                    Município
+                                    <span class="text-error">*</span>
+                                </label>
 
                                 <div class="relative">
-                                    <input class="form-input w-full bg-surface border border-outline-variant rounded-lg font-body-sm text-on-surface focus:ring-primary pl-3 pr-10" placeholder="Digite o nome..." type="text">
 
-                                    <button class="absolute right-2 top-1/2 -translate-y-1/2 text-primary hover:text-primary-container">
-                                        <span class="material-symbols-outlined text-[20px]">add_circle</span>
-                                    </button>
+                                    <!-- Campo de pesquisa -->
+                                    <input
+                                        type="text"
+                                        id="municipioBusca"
+                                        placeholder="Selecione um Estado primeiro"
+                                        autocomplete="off"
+                                        disabled
+                                        required
+                                        class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]"
+                                    >
+
+                                    <!-- ID do município selecionado -->
+                                    <input
+                                        type="hidden"
+                                        id="municipio"
+                                        name="municipio"
+                                    >
+
+                                    <!-- Lista de municípios -->
+                                    <div
+                                        id="listaMunicipios"
+                                        class="hidden absolute top-full left-0 z-50 w-full mt-1 bg-surface border border-outline-variant rounded-md shadow-lg max-h-48 overflow-y-auto"
+                                    ></div>
+
+                                </div>
+                            </div>                                                            
+                            <!-- Escola -->
+                            <div>
+                                <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">
+                                    Selecionar Escola
+                                    <span class="text-error">*</span>
+                                </label>
+
+                                <div class="relative">
+
+                                    <!-- Campo de pesquisa -->
+                                    <input
+                                        type="text"
+                                        id="escolaBusca"
+                                        placeholder="Selecione um município primeiro"
+                                        autocomplete="off"
+                                        disabled                                    
+                                        class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]"
+                                    >
+
+                                    <!-- Código da escola selecionada -->
+                                    <input
+                                        type="hidden"
+                                        id="escola"
+                                        name="escola"
+                                    >
+
+                                    <!-- Lista de escolas -->
+                                    <div
+                                        id="listaEscolas"
+                                        class="hidden absolute top-full left-0 z-50 w-full mt-1 bg-surface border border-outline-variant rounded-md shadow-lg max-h-48 overflow-y-auto"
+                                    ></div>
+
                                 </div>
                             </div>
+
+                            <!-- Botão Pesquisar -->
+                            <div class="flex items-end">
+                                <button
+                                    type="button"
+                                    id="btnPesquisar"
+                                    class="w-full h-[40px] bg-primary text-on-primary font-label-md text-label-md rounded-md hover:bg-on-primary-fixed-variant transition-colors shadow-sm"
+                                >
+                                    Pesquisar
+                                </button>
+                            </div>
                         </div>
+                        <!-- Escolas selecionadas para comparação -->
+                        <div class="mt-md pt-md border-t border-outline-variant flex flex-col gap-md">
 
-                        <!-- Selected Entities -->
-                        <div class="mt-md pt-md border-t border-outline-variant flex flex-col md:flex-row items-start md:items-center justify-between gap-md">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-sm">
 
-                            <div class="flex flex-wrap items-center gap-sm">
-                                <span class="font-label-md text-on-surface">Selecionadas (3/3):</span>
+                                <div>
+                                    <h2 class="font-label-md text-on-surface">
+                                        Escolas selecionadas
+                                    </h2>
 
-                                <!-- Entity Chip 1 -->
-                                <div class="flex items-center gap-xs bg-surface border border-outline-variant rounded-full pl-2 pr-1 py-1">
-                                    <div class="w-3 h-3 rounded-full bg-primary"></div>
-                                    <span class="font-label-sm text-on-surface">E.E. Machado de Assis</span>
-                                    <button class="text-on-surface-variant hover:text-error transition-colors">
-                                        <span class="material-symbols-outlined text-[16px]">close</span>
-                                    </button>
+                                    <p
+                                        id="contadorEscolas"
+                                        class="font-body-sm text-on-surface-variant"
+                                        aria-live="polite"
+                                    >
+                                        0 de 3 escolas selecionadas
+                                    </p>
                                 </div>
 
-                                <!-- Entity Chip 2 -->
-                                <div class="flex items-center gap-xs bg-surface border border-outline-variant rounded-full pl-2 pr-1 py-1">
-                                    <div class="w-3 h-3 rounded-full bg-secondary"></div>
-                                    <span class="font-label-sm text-on-surface">E.M. Cora Coralina</span>
-                                    <button class="text-on-surface-variant hover:text-error transition-colors">
-                                        <span class="material-symbols-outlined text-[16px]">close</span>
-                                    </button>
-                                </div>
+                                <button
+                                    type="button"
+                                    id="btnAtualizarDados"
+                                    disabled
+                                    class="bg-primary hover:bg-primary-container text-on-primary font-label-md px-lg py-3 rounded-lg shadow-sm transition-all flex items-center justify-center gap-xs whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    <span class="material-symbols-outlined text-[20px]">
+                                        sync
+                                    </span>
 
-                                <!-- Entity Chip 3 -->
-                                <div class="flex items-center gap-xs bg-surface border border-outline-variant rounded-full pl-2 pr-1 py-1">
-                                    <div class="w-3 h-3 rounded-full bg-tertiary"></div>
-                                    <span class="font-label-sm text-on-surface">Colégio Estadual Central</span>
-                                    <button class="text-on-surface-variant hover:text-error transition-colors">
-                                        <span class="material-symbols-outlined text-[16px]">close</span>
-                                    </button>
-                                </div>
+                                    Atualizar Dados
+                                </button>
+
                             </div>
 
-                            <button class="bg-primary hover:bg-primary-container text-on-primary font-label-md px-lg py-3 rounded-lg shadow-sm transition-all flex items-center gap-xs whitespace-nowrap">
-                                <span class="material-symbols-outlined text-[20px]">sync</span>
-                                Atualizar Dados
-                            </button>
+                            <!-- Os chips das escolas serão inseridos pelo JavaScript -->
+                            <div
+                                id="escolasSelecionadas"
+                                class="flex flex-wrap items-center gap-sm"
+                                aria-label="Lista de escolas selecionadas para comparação"
+                            ></div>
+
+                            <p
+                                id="mensagemComparacao"
+                                class="hidden font-body-sm text-on-surface-variant"
+                                role="status"
+                                aria-live="polite"
+                            ></p>
+
                         </div>
+                        
                     </div>
                 </section>
 
                 <!-- Dashboard Grid (Bento Pattern) -->
                 <section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
 
-                    <!-- Chart 1: IDEB Values (Bar Chart) -->
+                    <!-- Grafico linhas ideb -->
                     <div class="md:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-md data-card flex flex-col">
-                        <div class="flex justify-between items-center mb-md">
-                            <div class="flex items-center gap-xs">
-                                <h2 class="font-headline-sm text-on-surface">IDEB 2023</h2>
-                                <span class="material-symbols-outlined text-on-surface-variant text-[18px] cursor-help" title="Índice de Desenvolvimento da Educação Básica">info</span>
-                            </div>
-
-                            <div class="font-label-sm text-on-surface-variant bg-surface px-2 py-1 rounded border border-outline-variant">
-                                Ensino Fundamental II
-                            </div>
-                        </div>
-
-                        <div class="flex-1 relative min-h-[240px] flex items-end justify-around pt-6 pb-2 border-b border-l border-outline-variant">
-
-                            <!-- Y-Axis markers -->
-                            <div class="absolute left-0 top-0 h-full w-full flex flex-col justify-between items-start -ml-6 pointer-events-none text-outline">
-                                <span class="font-label-sm">8.0</span>
-                                <span class="font-label-sm">6.0</span>
-                                <span class="font-label-sm">4.0</span>
-                                <span class="font-label-sm">2.0</span>
-                                <span class="font-label-sm">0.0</span>
-                            </div>
-
-                            <!-- Horizontal Grid Lines -->
-                            <div class="absolute left-0 top-0 w-full h-full flex flex-col justify-between pointer-events-none opacity-20">
-                                <div class="w-full border-t border-outline-variant"></div>
-                                <div class="w-full border-t border-outline-variant"></div>
-                                <div class="w-full border-t border-outline-variant"></div>
-                                <div class="w-full border-t border-outline-variant"></div>
-                                <div class="w-full"></div>
-                            </div>
-
-                            <!-- Bars -->
-                            <div class="group relative flex flex-col items-center w-16 z-10">
-                                <div class="absolute -top-8 opacity-0 group-hover:opacity-100 transition-opacity bg-inverse-surface text-inverse-on-surface font-label-sm py-1 px-2 rounded">6.5</div>
-                                <div class="w-full bg-primary rounded-t-sm" style="height: 81.25%;"></div>
-                                <span class="mt-2 font-label-sm text-on-surface-variant text-center leading-tight">Machado<br>de Assis</span>
-                            </div>
-
-                            <div class="group relative flex flex-col items-center w-16 z-10">
-                                <div class="absolute -top-8 opacity-0 group-hover:opacity-100 transition-opacity bg-inverse-surface text-inverse-on-surface font-label-sm py-1 px-2 rounded">5.8</div>
-                                <div class="w-full bg-secondary rounded-t-sm" style="height: 72.5%;"></div>
-                                <span class="mt-2 font-label-sm text-on-surface-variant text-center leading-tight">Cora<br>Coralina</span>
-                            </div>
-
-                            <div class="group relative flex flex-col items-center w-16 z-10">
-                                <div class="absolute -top-8 opacity-0 group-hover:opacity-100 transition-opacity bg-inverse-surface text-inverse-on-surface font-label-sm py-1 px-2 rounded">7.2</div>
-                                <div class="w-full bg-tertiary rounded-t-sm" style="height: 90%;"></div>
-                                <span class="mt-2 font-label-sm text-on-surface-variant text-center leading-tight">Estadual<br>Central</span>
-                            </div>
-                        </div>
+                        <div class="relative w-full h-80 hidden" id="divLinha">                     
+                            <canvas id="graficoLinha"></canvas>
+                        </div>       
                     </div>
 
                     <!-- Chart 4: Average SAEB (List/Progress rep) -->
                     <div class="md:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-xl p-md data-card flex flex-col">
-                        <div class="flex justify-between items-center mb-md">
-                            <h2 class="font-headline-sm text-on-surface">SAEB Médio</h2>
-                            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">assessment</span>
-                        </div>
-
-                        <div class="flex flex-col gap-lg flex-1 justify-center">
-
-                            <!-- School 1 -->
-                            <div class="flex flex-col gap-1">
-                                <div class="flex justify-between font-label-sm">
-                                    <span class="text-on-surface font-semibold">Machado de Assis</span>
-                                    <span class="text-on-surface-variant">285 pts</span>
-                                </div>
-
-                                <div class="w-full bg-surface-variant rounded-full h-3 overflow-hidden">
-                                    <div class="bg-primary h-full rounded-full" style="width: 75%"></div>
-                                </div>
-                            </div>
-
-                            <!-- School 2 -->
-                            <div class="flex flex-col gap-1">
-                                <div class="flex justify-between font-label-sm">
-                                    <span class="text-on-surface font-semibold">Cora Coralina</span>
-                                    <span class="text-on-surface-variant">250 pts</span>
-                                </div>
-
-                                <div class="w-full bg-surface-variant rounded-full h-3 overflow-hidden">
-                                    <div class="bg-secondary h-full rounded-full" style="width: 62%"></div>
-                                </div>
-                            </div>
-
-                            <!-- School 3 -->
-                            <div class="flex flex-col gap-1">
-                                <div class="flex justify-between font-label-sm">
-                                    <span class="text-on-surface font-semibold">Estadual Central</span>
-                                    <span class="text-on-surface-variant">310 pts</span>
-                                </div>
-
-                                <div class="w-full bg-surface-variant rounded-full h-3 overflow-hidden">
-                                    <div class="bg-tertiary h-full rounded-full" style="width: 85%"></div>
-                                </div>
-                            </div>
+                       <div class="relative w-full h-80 hidden" id="divDoughnut">                     
+                            <canvas id="graficoDoughnut"></canvas>
                         </div>
                     </div>
 
@@ -376,6 +366,9 @@
             <!-- footer -->
             {%include('componentes/footer.html')%}
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="static/js/comparacao.js"></script>
+        <script src="static/js/comparacao_graficos.js"></script>
     </body>
 </html>
 
