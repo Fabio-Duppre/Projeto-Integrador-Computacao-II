@@ -415,6 +415,3 @@ def cards():
         return jsonify(cards)
     finally:
         connection.close()
-
-
-
