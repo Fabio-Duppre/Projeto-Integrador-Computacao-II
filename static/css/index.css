@@ -1,0 +1,282 @@
+
+/* =========================================
+   EDUCADATA BRASIL
+   CSS RESPONSIVO
+   Celulares, tablets, notebooks e desktops
+========================================= */
+
+/* Evita que padding e bordas aumentem
+   inesperadamente as dimensões dos elementos */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Evita rolagem horizontal desnecessária */
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+}
+
+body {
+    min-width: 320px;
+}
+
+/* Conteúdo principal */
+main {
+    min-width: 0;
+}
+
+/* Impede que os elementos do grid
+   ultrapassem suas colunas */
+main section,
+main section > div {
+    min-width: 0;
+}
+
+/* =========================================
+   CARDS
+========================================= */
+
+main section:first-child > div {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+main section:first-child h3 {
+    overflow-wrap: break-word;
+}
+
+main section:first-child p {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+/* =========================================
+   MAPA
+========================================= */
+
+#map {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+}
+
+/* Permite que o mapa ocupe o espaço
+   disponível dentro de seu contêiner */
+.leaflet-container {
+    width: 100%;
+    height: 100%;
+}
+
+/* =========================================
+   GRÁFICOS
+========================================= */
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    height: 350px;
+}
+
+/* O canvas acompanha o tamanho do contêiner */
+.chart-container canvas {
+    display: block;
+    max-width: 100%;
+}
+
+/* =========================================
+   TABLETS E NOTEBOOKS MENORES
+   768px até 1199px
+========================================= */
+
+@media (min-width: 768px) and (max-width: 1199px) {
+
+    /* Ajusta o espaçamento geral */
+    main {
+        padding: 1.25rem;
+    }
+
+    /* Dois cards por linha */
+    main section:first-child {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    /* Mantém os cards com alturas consistentes */
+    main section:first-child > div {
+        min-height: 130px;
+        height: auto;
+    }
+
+    /* Reduz o tamanho dos títulos dos cards */
+    main section:first-child h3 {
+        font-size: 0.875rem;
+        line-height: 1.35;
+    }
+
+    /* Reduz títulos extensos */
+    main section:first-child p:first-of-type {
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+
+    /* Mapa */
+    #map {
+        min-height: 350px;
+    }
+
+    /* Gráfico */
+    .chart-container {
+        height: 320px;
+    }
+}
+
+/* =========================================
+   NOTEBOOKS E DESKTOPS
+   A partir de 1200px
+========================================= */
+
+@media (min-width: 1200px) {
+
+    main section:first-child {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .chart-container {
+        height: 380px;
+    }
+}
+
+/* =========================================
+   CELULARES
+   Até 767px
+========================================= */
+
+@media (max-width: 767px) {
+
+    /* O menu lateral não deve reservar
+       280px da tela em dispositivos móveis */
+    body {
+        flex-direction: column;
+    }
+
+    /* Remove a margem fixa do conteúdo.
+       O seletor considera a classe usada no HTML. */
+    body > div.ml-\[280px\] {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+    }
+
+    /* Espaçamento interno mais compacto */
+    main {
+        width: 100%;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    /* Um card por linha */
+    main section:first-child {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.75rem;
+    }
+
+    /* Permite que o card cresça conforme o conteúdo */
+    main section:first-child > div {
+        width: 100%;
+        min-height: 120px;
+        height: auto;
+        gap: 0.75rem;
+    }
+
+    /* Títulos dos cards */
+    main section:first-child h3 {
+        font-size: 0.875rem;
+        line-height: 1.4;
+    }
+
+    /* Nomes dos estados */
+    main section:first-child p:first-of-type {
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+
+    /* Ajusta a seção do mapa */
+    main section:nth-child(2) {
+        height: auto;
+        min-height: 0;
+    }
+
+    main section:nth-child(2) > div {
+        min-height: 400px;
+    }
+
+    /* Cabeçalho do mapa */
+    main section:nth-child(2) h2 {
+        font-size: 1.125rem;
+        line-height: 1.4;
+    }
+
+    main section:nth-child(2) p {
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+
+    /* O mapa deve ter altura suficiente
+       para continuar legível */
+    #map {
+        min-height: 350px;
+    }
+
+    /* Seção do gráfico */
+    .chart-container {
+        height: 280px;
+    }
+
+    /* Título do gráfico */
+    main section:nth-child(3) h2 {
+        font-size: 1.125rem;
+        line-height: 1.4;
+    }
+}
+
+/* =========================================
+   CELULARES ESTREITOS
+   Até 380px
+========================================= */
+
+@media (max-width: 380px) {
+
+    main {
+        padding: 0.75rem;
+    }
+
+    main section:first-child > div {
+        padding: 0.75rem;
+    }
+
+    main section:first-child h3 {
+        font-size: 0.8rem;
+    }
+
+    main section:first-child p:first-of-type {
+        font-size: 1.1rem;
+    }
+
+    main section:nth-child(2) > div {
+        min-height: 350px;
+    }
+
+    #map {
+        min-height: 300px;
+    }
+
+    .chart-container {
+        height: 250px;
+    }
+}
+
