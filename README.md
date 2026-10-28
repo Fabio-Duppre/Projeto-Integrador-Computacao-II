@@ -2,6 +2,8 @@
 
 Projeto Integrador II desenvolvido para o curso de Ciência de Dados da UNIVESP.
 
+link : https://projeto-integrador-computacao-ii.onrender.com/
+
 ## Para rodar o projeto
 
 ### 1. Instalar as dependências
@@ -51,6 +53,7 @@ O projeto foi desenvolvido utilizando:
 * **Tailwind CSS**
 * **Leaflet**
 * **Chart.js**
+* **Pyteste**
 
 O projeto também utiliza uma API desenvolvida com Flask para disponibilizar os dados utilizados pela interface da aplicação.
 
