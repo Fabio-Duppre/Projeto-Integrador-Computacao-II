@@ -7,7 +7,6 @@ const estadosPorRegiao = {
     "5": ["DF", "GO", "MT", "MS"]
 };
 
-
 let regioesLayer = null;
 let estadosLayer = null;
 let dadosIdeb = [];
@@ -123,9 +122,7 @@ function mostrarEstados(codarea) {
         });
 }
 
-/*
-    Grafico
-*/    
+//Grafico
 let centro_oeste
 let norte
 let sul
@@ -166,4 +163,3 @@ let sudeste
     .catch(error => {
         console.error(error);
     });
-

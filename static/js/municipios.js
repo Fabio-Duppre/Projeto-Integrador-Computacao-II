@@ -115,7 +115,6 @@ document.addEventListener("click", (evento) => {
 });
 
 // Pesquisar 
-
 const btnPesquisar = document.getElementById("btnPesquisar");
 
 btnPesquisar.addEventListener("click", async () => {

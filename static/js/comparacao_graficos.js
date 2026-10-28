@@ -92,6 +92,12 @@ async function carregarGraficoLinha(escolas){
                         y: {
                         beginAtZero: true
                         }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Comparativo Valores IDEB'
+                        },
                     }
                 }
             }); 
@@ -325,7 +331,14 @@ async function carregarGraficosBarras(escolas){
                         y: {
                         beginAtZero: true
                         }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Português (SAEB)'
+                        },
                     }
+
                 }
             }); 
         } 
@@ -352,6 +365,12 @@ async function carregarGraficosBarras(escolas){
                         y: {
                         beginAtZero: true
                         }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Matemática (SAEB)'
+                        },
                     }
                 }
             }); 

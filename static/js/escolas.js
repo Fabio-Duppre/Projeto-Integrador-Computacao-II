@@ -348,6 +348,12 @@ async function carregarGraficoLinha(codigoEscola){
                         y: {
                         beginAtZero: true
                         }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Valores IDEB'
+                        },
                     }
                 }
             }); 
@@ -358,7 +364,6 @@ async function carregarGraficoLinha(codigoEscola){
     }         
 
 }
-
 
 // verifica grafico ja criado
 let graficoBarraIdeb = null;
@@ -412,6 +417,12 @@ async function carregarGraficoBarraIdeb(codigoEscola){
                         y: {
                         beginAtZero: true
                         }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Metas do IDEB'
+                        },
                     }
                 }
             }); 
