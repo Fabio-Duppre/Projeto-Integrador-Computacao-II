@@ -2,32 +2,22 @@
 <html class="light" lang="pt-BR">
     <head>
         {% include 'componentes/links.html'%}
-
-        <title>
-            EducaData Brasil - Comparação
-        </title>
+        <title> Aprendata Brasil - Comparação </title>
     </head>
 
     <body class="bg-background text-on-background font-body-md antialiased flex min-h-screen">
-        <!-- SideNavBar (Desktop Only) -->
+        <!-- Aside -->
         {% include 'componentes/aside.html' %}
-
-        <!-- Main Content Area -->
+        <!-- Main -->
         <div class="flex-1 flex flex-col md:ml-[280px] w-full min-w-0">
-
-            <!-- TopNavBar -->
-            {% include 'componentes/header.html' %}
-
-            <!-- Page Canvas -->
+            <!-- Navbar -->
+            {% include 'componentes/header.html' %}            
             <main class="flex-1 p-margin-mobile md:p-margin-desktop flex flex-col gap-lg bg-background">
-
-                <!-- Page Header & Interactive Filter Area -->
+                <!-- Secao filtro -->
                 <section class="flex flex-col gap-sm">
                     <h1 class="font-headline-lg-mobile md:font-headline-lg text-on-background">Análise Comparativa</h1>
-                    <p class="font-body-md text-on-surface-variant max-w-3xl">Selecione até 3 unidades escolares para cruzar dados de desempenho, proficiência e metas atingidas.</p>
-                                   
-                    <div class="mt-sm bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-sm">
-                         <!-- Filter Panel -->                  
+                    <p class="font-body-md text-on-surface-variant max-w-3xl">Selecione até 3 unidades escolares para cruzar dados de desempenho, proficiência e metas atingidas.</p>                                   
+                    <div class="mt-sm bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-sm">                         
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-sm">
                             <!--Estado-->
                             <div>
@@ -35,13 +25,7 @@
                                     Estado
                                     <span class="text-error">*</span>
                                 </label>
-
-                                <select
-                                    id="estado"
-                                    name="estado"
-                                    class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]"
-                                    required
-                                >
+                                <select id="estado" name="estado" class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]" required>
                                     <option value="">
                                         Selecione um Estado
                                     </option>
@@ -61,31 +45,13 @@
                                 </label>
 
                                 <div class="relative">
-
                                     <!-- Campo de pesquisa -->
-                                    <input
-                                        type="text"
-                                        id="municipioBusca"
-                                        placeholder="Selecione um Estado primeiro"
-                                        autocomplete="off"
-                                        disabled
-                                        required
-                                        class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]"
-                                    >
-
+                                    <input type="text" id="municipioBusca" placeholder="Selecione um Estado primeiro" autocomplete="off" disabled required class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]">
                                     <!-- ID do município selecionado -->
-                                    <input
-                                        type="hidden"
-                                        id="municipio"
-                                        name="municipio"
-                                    >
-
+                                    <input type="hidden" id="municipio" name="municipio">
                                     <!-- Lista de municípios -->
-                                    <div
-                                        id="listaMunicipios"
-                                        class="hidden absolute top-full left-0 z-50 w-full mt-1 bg-surface border border-outline-variant rounded-md shadow-lg max-h-48 overflow-y-auto"
-                                    ></div>
-
+                                    <div id="listaMunicipios" class="hidden absolute top-full left-0 z-50 w-full mt-1 bg-surface border border-outline-variant rounded-md shadow-lg max-h-48 overflow-y-auto">                                       
+                                    </div>
                                 </div>
                             </div>                                                            
                             <!-- Escola -->
@@ -96,30 +62,13 @@
                                 </label>
 
                                 <div class="relative">
-
                                     <!-- Campo de pesquisa -->
-                                    <input
-                                        type="text"
-                                        id="escolaBusca"
-                                        placeholder="Selecione um município primeiro"
-                                        autocomplete="off"
-                                        disabled                                    
-                                        class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]"
-                                    >
-
+                                    <input type="text" id="escolaBusca" placeholder="Selecione um município primeiro" autocomplete="off" disabled class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]">
                                     <!-- Código da escola selecionada -->
-                                    <input
-                                        type="hidden"
-                                        id="escola"
-                                        name="escola"
-                                    >
-
+                                    <input type="hidden" id="escola" name="escola">
                                     <!-- Lista de escolas -->
-                                    <div
-                                        id="listaEscolas"
-                                        class="hidden absolute top-full left-0 z-50 w-full mt-1 bg-surface border border-outline-variant rounded-md shadow-lg max-h-48 overflow-y-auto"
-                                    ></div>
-
+                                    <div id="listaEscolas" class="hidden absolute top-full left-0 z-50 w-full mt-1 bg-surface border border-outline-variant rounded-md shadow-lg max-h-48 overflow-y-auto">                                        
+                                    </div>
                                 </div>
                             </div>
 
@@ -168,7 +117,7 @@
 
                             </div>
 
-                            <!-- Os chips das escolas serão inseridos pelo JavaScript -->
+                            <!-- Escolas selecionadas no Filtro -->
                             <div
                                 id="escolasSelecionadas"
                                 class="flex flex-wrap items-center gap-sm"
@@ -181,15 +130,12 @@
                                 role="status"
                                 aria-live="polite"
                             ></p>
-
-                        </div>
-                        
+                        </div>                        
                     </div>
                 </section>
 
-                <!-- Dashboard Grid (Bento Pattern) -->
+                <!-- Seção do dashboard -->
                 <section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-
                     <!-- Grafico linhas ideb -->
                     <div class="md:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-md data-card flex flex-col">
                         <div class="relative w-full h-80 hidden" id="divLinha">                     
@@ -197,28 +143,28 @@
                         </div>       
                     </div>
 
-                    <!-- Chart 4: Average SAEB (List/Progress rep) -->
+                    <!-- Grafico media pronizada Saeb -->
                     <div class="md:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-xl p-md data-card flex flex-col">
                        <div class="relative w-full h-80 hidden" id="divDoughnut">                     
                             <canvas id="graficoDoughnut"></canvas>
                         </div>
                     </div>
 
-                    <!-- Chart 2: Portuguese Proficiency -->
+                    <!-- Grafico Portugues -->
                     <div class="md:col-span-6 bg-surface-container-lowest border border-outline-variant rounded-xl p-md data-card flex flex-col">
                         <div class="relative w-full h-80 hidden" id="divPortugues">                     
                             <canvas id="graficoBarraPortugues"></canvas>
                         </div>
                     </div>
 
-                    <!-- Chart 3: Math Proficiency -->
+                    <!-- Grafico Matematica -->
                     <div class="md:col-span-6 bg-surface-container-lowest border border-outline-variant rounded-xl p-md data-card flex flex-col">
                         <div class="relative w-full h-80 hidden" id="divMatematica">                     
                             <canvas id="graficoBarraMatematica"></canvas>
                         </div>
                     </div>
 
-                    <!-- Chart 5: Goals Met -->
+                    <!-- Grafico metas -->
                     <div class="md:col-span-12 bg-surface-container-lowest border border-outline-variant rounded-xl p-md data-card mb-xl">
                         <div class="flex flex-col md:flex-row md:items-center justify-between mb-lg gap-sm">
                             <div>
@@ -256,7 +202,6 @@
                             <!-- Escola 2 -->
                             <div class="flex flex-col gap-2 hidden" id="divMeta2">
                                 <span class="text-sm font-semibold text-on-surface break-words" id="nomeMeta2"></span>
-
                                 <div class="relative w-full h-8 bg-surface-container rounded-sm border border-outline-variant/30">
                                     <!-- Meta -->
                                     <div
@@ -271,7 +216,6 @@
                                         style="width: 65%;"
                                         id="resultado2">
                                     </div>
-
                                 </div>
 
                                 <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-xs sm:text-sm">
@@ -306,7 +250,6 @@
                     </div>
                 </section>
             </main>
-
             <!-- footer -->
             {%include('componentes/footer.html')%}
         </div>
@@ -316,4 +259,3 @@
         <script src="static/js/recursividade.js"></script>        
     </body>
 </html>
-

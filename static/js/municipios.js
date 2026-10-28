@@ -129,14 +129,6 @@ btnPesquisar.addEventListener("click", async () => {
         alert("Selecione o estado, informe o ano e selecione um município.");
         return;
     }
-
-    console.log("Pesquisa realizada:", {
-        codigoEstado,
-        ano,
-        codigoMunicipio,
-        nomeMunicipio
-    });
-
     // Carrega a silhueta do município
     await carregarSilhuetaMunicipio(codigoMunicipio, nomeMunicipio);
 

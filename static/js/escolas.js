@@ -5,7 +5,6 @@ const municipioBusca = document.getElementById("municipioBusca");
 const municipioInput = document.getElementById("municipio");
 const listaMunicipios = document.getElementById("listaMunicipios");
 
-
 let municipios = [];
 
 // Busca os municípios quando o estado é alterado
@@ -278,8 +277,7 @@ btnPesquisar.addEventListener("click", async () => {
     
 });
 
-async function carregarEscola(codigoEscola){
-    console.log(codigoEscola)
+async function carregarEscola(codigoEscola){    
     try {
         const resposta_escola = await fetch(           
             `/api/escolas_cards/${codigoEscola}`

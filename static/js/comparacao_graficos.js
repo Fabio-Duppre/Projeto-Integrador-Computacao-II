@@ -1,18 +1,4 @@
-async function AtualizarDados(escolas){
-    if (escolas[0]){
-        console.log(escolas[0].codigo)
-
-    }
-
-    if (escolas[1]){
-        console.log("Escola 1")
-    }
-
-    if (escolas[2]){
-        console.log("Escola 2")
-    }
-
-    
+async function AtualizarDados(escolas){    
     // Carrega os dados da escola
     await carregarGraficoLinha(escolas);
 

@@ -1,5 +1,5 @@
 <aside id="sidebar" class="flex flex-col h-full p-md gap-xs border-r border-outline-variant bg-surface-container-low fixed left-0 top-0 w-[280px] shadow-sm z-40">
-    <!-- Brand/Header -->
+    <!-- Header -->
     <div class="flex items-center gap-sm mb-lg px-xs">
         <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container shrink-0">
             <span class="material-symbols-outlined">
@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <!-- Main Nav Tabs -->    
+    <!-- Navbar aside -->    
     <nav class="flex-1 flex flex-col gap-base">
         <a class="  {% if request.endpoint == 'index' %}
                         flex items-center gap-sm px-sm py-sm bg-secondary-container text-on-secondary-container font-semibold rounded-lg scale-95 duration-150
@@ -54,7 +54,7 @@
         </a>
     </nav>
 
-    <!-- Footer Nav Tabs -->
+    <!-- Footer da navbar aside -->
     <div id="aside_ajuda" class="flex flex-col gap-base border-t border-outline-variant pt-sm mt-auto">
         <a class="flex items-center gap-sm px-sm py-sm text-on-surface-variant hover:bg-surface-container-highest transition-all scale-95 duration-150 rounded-lg" href="#">
             <span class="material-symbols-outlined">help</span>

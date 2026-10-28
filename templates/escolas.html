@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
     <head>
         {% include 'componentes/links.html'%}
-        <title>EducaData Brasil - Escolas</title>  
+        <title>Aprendata Brasil - Escolas</title>  
     </head>
-
     <body class="bg-background text-on-background font-body-md antialiased min-h-screen flex">
 
-        <!-- SideNavBar (Desktop) -->
+        <!-- Aside -->
         {% include 'componentes/aside.html'%}
 
-        <!-- Main Content Wrapper -->
+        <!-- Main -->
         <div class="flex-1 flex flex-col md:ml-[280px] min-w-0">
-
-            <!-- TopNavBar -->
-            {% include 'componentes/header.html'%}
-
-            <!-- Main Canvas -->
+            <!-- Header -->
+            {% include 'componentes/header.html'%}            
             <main class="flex-1 p-margin-mobile md:p-margin-desktop overflow-y-auto bg-surface-bright flex flex-col gap-gutter">
 
-                <!-- Page Header & Global Actions -->
+                <!-- Intro e botão exportar -->
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-sm">
-
                     <div>
                         <h2 class="font-headline-lg-mobile md:font-headline-lg text-on-surface tracking-tight">
                             Análise de Escolas
@@ -39,7 +33,7 @@
                     </button>
                 </div>
 
-                <!-- Filter Section (Data Card Style) -->
+                <!-- Seção do Filtro -->
                 <section class="bg-surface-container-lowest rounded-lg p-md shadow-sm border border-surface-container-highest">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-sm">
                         <!--Estado-->
@@ -49,12 +43,7 @@
                                 <span class="text-error">*</span>
                             </label>
 
-                            <select
-                                id="estado"
-                                name="estado"
-                                class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]"
-                                required
-                            >
+                            <select id="estado" name="estado" class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]" required>
                                 <option value="">
                                     Selecione um Estado
                                 </option>
@@ -74,31 +63,13 @@
                             </label>
 
                             <div class="relative">
-
                                 <!-- Campo de pesquisa -->
-                                <input
-                                    type="text"
-                                    id="municipioBusca"
-                                    placeholder="Selecione um Estado primeiro"
-                                    autocomplete="off"
-                                    disabled
-                                    required
-                                    class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]"
-                                >
-
+                                <input type="text" id="municipioBusca" placeholder="Selecione um Estado primeiro" autocomplete="off" disabled required class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]">
                                 <!-- ID do município selecionado -->
-                                <input
-                                    type="hidden"
-                                    id="municipio"
-                                    name="municipio"
-                                >
-
+                                <input type="hidden" id="municipio" name="municipio">
                                 <!-- Lista de municípios -->
-                                <div
-                                    id="listaMunicipios"
-                                    class="hidden absolute top-full left-0 z-50 w-full mt-1 bg-surface border border-outline-variant rounded-md shadow-lg max-h-48 overflow-y-auto"
-                                ></div>
-
+                                <div id="listaMunicipios" class="hidden absolute top-full left-0 z-50 w-full mt-1 bg-surface border border-outline-variant rounded-md shadow-lg max-h-48 overflow-y-auto">                                    
+                                </div>
                             </div>
                         </div>                                                            
                         <!-- Escola -->
@@ -109,48 +80,26 @@
                             </label>
 
                             <div class="relative">
-
                                 <!-- Campo de pesquisa -->
-                                <input
-                                    type="text"
-                                    id="escolaBusca"
-                                    placeholder="Selecione um município primeiro"
-                                    autocomplete="off"
-                                    disabled
-                                    required
-                                    class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]"
-                                >
-
+                                <input type="text" id="escolaBusca" placeholder="Selecione um município primeiro" autocomplete="off" disabled required class="w-full bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary h-[40px]">                                
                                 <!-- Código da escola selecionada -->
-                                <input
-                                    type="hidden"
-                                    id="escola"
-                                    name="escola"
-                                >
-
+                                <input type="hidden" id="escola" name="escola">
                                 <!-- Lista de escolas -->
-                                <div
-                                    id="listaEscolas"
-                                    class="hidden absolute top-full left-0 z-50 w-full mt-1 bg-surface border border-outline-variant rounded-md shadow-lg max-h-48 overflow-y-auto"
-                                ></div>
-
+                                <div id="listaEscolas" class="hidden absolute top-full left-0 z-50 w-full mt-1 bg-surface border border-outline-variant rounded-md shadow-lg max-h-48 overflow-y-auto">                                    
+                                </div>
                             </div>
                         </div>
 
                         <!-- Botão Pesquisar -->
                         <div class="flex items-end">
-                            <button
-                                type="button"
-                                id="btnPesquisar"
-                                class="w-full h-[40px] bg-primary text-on-primary font-label-md text-label-md rounded-md hover:bg-on-primary-fixed-variant transition-colors shadow-sm"
-                            >
+                            <button type="button" id="btnPesquisar" class="w-full h-[40px] bg-primary text-on-primary font-label-md text-label-md rounded-md hover:bg-on-primary-fixed-variant transition-colors shadow-sm">
                                 Pesquisar
                             </button>
                         </div>
                     </div>
                 </section>
 
-                <!-- School Profile Card -->
+                <!-- Card Escola-->
                 <section class="bg-surface-container-lowest rounded-lg p-md shadow-sm border-l-4 border-l-primary flex flex-col md:flex-row items-start md:items-center justify-between gap-md">
 
                     <div class="flex items-center gap-md">
@@ -158,24 +107,18 @@
                         <div class="w-16 h-16 rounded-lg bg-surface-container-low flex items-center justify-center text-primary border border-outline-variant">
                             <span class="material-symbols-outlined text-[32px]">apartment</span>
                         </div>
-
                         <div>
                             <div class="flex items-center gap-xs">
-                                <h3 class="font-headline-md text-headline-md text-on-surface" id="nome_escola">
-                                    
-                                </h3>
+                                <h3 class="font-headline-md text-headline-md text-on-surface" id="nome_escola"></h3>
                             </div>
 
                             <div class="flex flex-wrap items-center gap-x-sm gap-y-base mt-1">
-
                                 <p class="font-body-sm text-on-surface-variant flex items-center gap-base">
                                     <span class="material-symbols-outlined text-[16px]">tag</span>
                                     Código INEP:
                                     <strong class="text-on-surface"><p id="codigo_escola"></p></strong>
                                 </p>
-
                                 <span class="w-1 h-1 bg-outline-variant rounded-full hidden md:block"></span>
-
                                 <p class="font-body-sm text-on-surface-variant flex items-center gap-base">
                                     <span class="material-symbols-outlined text-[16px]">account_balance</span>
                                     Rede:
@@ -186,24 +129,23 @@
                     </div>                    
                 </section>
 
-                <!-- Charts Grid -->
+                <!-- Graficos -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
-
-                    <!-- Chart 1: IDEB Evolution (Line Chart) -->
+                    <!-- Grafico Linha -->
                     <div class="bg-surface-container-lowest rounded-lg p-lg shadow-sm border border-surface-container-highest flex flex-col h-[360px]">                                                
                         <div class="relative w-full h-80 hidden" id="divLinha">                     
                             <canvas id="graficoLinha"></canvas>
                         </div>
                     </div>
 
-                    <!-- Chart 2: Goals vs Achieved (Dual Bar) -->
+                    <!-- Grafico Barra ideb -->
                     <div class="bg-surface-container-lowest rounded-lg p-md shadow-sm border border-surface-container-highest flex flex-col h-[360px]">
                         <div class="relative w-full h-80 hidden" id="divBarraIdeb">                     
                             <canvas id="graficoBarraIdeb"></canvas>
                         </div>
                     </div>
 
-                    <!-- Chart 3: Proficiency (Grouped Bar) -->
+                    <!-- Grafico Barra Saeb -->
                     <div class="bg-surface-container-lowest rounded-lg p-md shadow-sm border border-surface-container-highest flex flex-col h-[400px] lg:col-span-2">                                    
                         <div class="bg-surface-container-lowest rounded-lg p-md shadow-sm border border-surface-container-highest flex flex-col h-[360px]">
                             <div class="relative w-full h-80 hidden" id="divBarraSaeb">                     
@@ -213,11 +155,11 @@
                     </div>
                 </div>
             </main>
+            <!-- footer -->
+            {%include('componentes/footer.html')%}
         </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="static/js/escolas.js"></script>
         <script src="static/js/recursividade.js"></script>        
     </body>
-
 </html>
-
