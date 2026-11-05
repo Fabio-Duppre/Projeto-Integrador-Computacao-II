@@ -16,6 +16,7 @@ def estado_media():
                 INNER JOIN ideb b
                 ON b.codigo_estado = a.id
                 WHERE b.ano = 2025
+                AND b.valor_ideb != 0
                 GROUP BY a.id, a.uf, a.nome
                 ORDER BY 1
             """
